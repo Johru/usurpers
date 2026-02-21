@@ -24,6 +24,10 @@ const addCard = (card: Card) => {
   });
 }
 
+const clearSlots = () => {
+  setSlots(Array(7).fill(null));
+}
+
 
   return (
      <div className="flex min-h-screen items-center ">
@@ -36,7 +40,7 @@ const addCard = (card: Card) => {
 
         <div className="flex w-full gap-1">
           <div className="flex-2" >
-           <SetSelection onSelectCard={addCard} />
+           <SetSelection onSelectCard={addCard} clearSlots={clearSlots} />
           </div>
       
            <div className="flex-3">

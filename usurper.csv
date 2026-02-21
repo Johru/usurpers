@@ -1,0 +1,48 @@
+id,label,set1,set2
+beggars,Beggars,crime,commoner
+miners,Miners,,commoner
+priests,Priests,magic,defense
+lookouttowers,Lookout towers,defense,tactic
+travellingmerchants,Travelling Merchants,wealth,mercenary
+farmers,Farmers,,commoner
+labouers,Labouers,mercenary,commoner
+looters,Looters,mercenary,warrior
+vanguard,Vanguard,expansion,retinue
+dryads,Dryads,magic,wilderness
+acolytes,Acolytes,shadow,conspiracy
+workshops,Workshops,,commoner
+raiders,Raiders,expansion,warrior
+banechanters,Bane chanters,retinue,cultist
+shieldwall,Shield wall,defense,warrior
+taxcollectors,Tax collectors,wealth,crime
+druids,Druids,shadow,wilderness
+waystations,Waystations,tactic,expansion
+volunteers,Volunteers,commoner,defense
+assassins,Assassins ,conspiracy,crime
+alchemists,Alchemists,magic,wealth
+siegeengines,Siege Engines,siege,retinue
+soulshepherds,Soul Shepherds,cultist,defense
+illusionists,Illusionists,magic,crime
+quartermasters,Quartermasters,warrior,retinue
+trolls,Trolls,wilderness,mercenary
+archers,Archers,tactic,retinue
+vampires,Vampires,shadow,cultist
+pillagers,Pillagers,mercenary,crime
+secrettunnels,Secret tunnels,conspiracy,expansion
+locallevys,Local Levys,commoner,tactic
+traderoutes,Trade routes,wealth,expansion
+heraldsofapocalypse,Heralds of apocalypse,conspiracy,cultist
+teleportals,Teleportals,magic,tactic
+knights,Knights,warrior,nobility
+stonegiants,Stone giants,siege,wilderness
+vigilantemob,Vigilante mob,conspiracy,commoner
+royalmages,Royal mages,magic,nobility
+undeadhorde,Undead Horde,shadow,warrior
+scholars,Scholars,,specialist
+dragonriders,Dragon Riders,siege,nobility
+wraiths,Wraiths,magic,shadow
+flyingcastles,Flying Castles,nobility,defense
+werewolves,Werewolves,warrior,wilderness
+demons,Demons,Cultist,
+valkyries,Valkyries,nobility,
+infiltrators,Infiltrators,-,
