@@ -1,11 +1,32 @@
+'use client';
+import { useEffect, useState } from 'react';
+import { Card } from '@/lib/categories';
+
+type SavedSelection = {
+  id: number;
+  name: string;
+  slots: Card[];
+};
+
 export default function SavedPage() {
+ const [saved, setSaved] = useState<SavedSelection[]>(() => {
+  if (typeof window === 'undefined') return [];
+  return JSON.parse(localStorage.getItem('savedSelections') ?? '[]');
+});
+
   return (
-     <div className="flex min-h-screen items-center justify-center">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 sm:items-start">
-        <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-          Saved Builds
-        </h1>
-      </main>
-    </div>
+    <table className='table-auto border-collapse border border-gray-400 w-full'>
+      <tr>
+        <th className="border border-gray-400 px-2 py-1">Name</th>
+        <th className="border border-gray-400 px-2 py-1" colSpan={7}>Cards</th>
+        
+      </tr>
+      {saved.map(entry => (
+        <tr key={entry.id}>
+          <td className="border border-gray-400 px-2 py-1 text-center text-2xl"><h3>{entry.name}</h3></td>
+          {entry.slots.map(card => <td key={card.id}  className="border border-gray-400 px-2 py-1">{card.label}</td>)}
+        </tr>
+      ))}
+   </table>
   );
 }

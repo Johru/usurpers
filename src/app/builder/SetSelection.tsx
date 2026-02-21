@@ -5,25 +5,29 @@ import { CARDS, SET_NAMES, Card } from '@/lib/categories';
 type Props = {
   onSelectCard: (sub: Card) => void,
   clearSlots: () => void,
+  saveSelection: () => void,
+  selectionName: string,
+  setSelectionName: (name: string) => void,
+  
 };
 
-export default function CategorySelection({onSelectCard, clearSlots}: Props)
+export default function CategorySelection({onSelectCard, clearSlots, saveSelection, selectionName, setSelectionName}: Props)
 {
   const [selectedSet, setselectedSet] = useState<string>('shadow');
 
-const cards: Card[] = CARDS.filter(card => card.sets.includes(selectedSet));
+  const cards: Card[] = CARDS.filter(card => card.sets.includes(selectedSet));
 
   const handleCardClick = (sub: Card) => {
     onSelectCard(sub); 
     console.log('clicked subcategory', sub.id);
   };
 
+  
+
   return (
-    <div className="flex w-full  justify-self-end mt-1  gap-1">
-      
+    <div className="flex w-full  justify-self-end mt-1  gap-1">      
       <div className="bg-(--panelbg) w-full rounded-2xl py-5 justify-self-end px-5  flex flex-col">  
-         <button onClick={() => clearSlots()}
-             className=' text-center rounded mb-5 px-3 py-2 bg-(--panelbg-light) hover:bg-(--panelbg) '>Clear selection</button>     
+           
           <span className='text-2xl py-3'>Set</span>
         <div className="mt-2 rounded-lg bg-(--panelbg-dark) p-3 text-sm w-50 grid grid-cols-2 gap-1"> 
              {Object.keys(SET_NAMES).map(cat => (
@@ -31,15 +35,14 @@ const cards: Card[] = CARDS.filter(card => card.sets.includes(selectedSet));
               <button
                 type="button"
                 onClick={() => setselectedSet(cat as string)}
-                className={`w-full text-left rounded px-3 py-2 
+                 className={`w-full text-left rounded px-3 py-2 
                   ${cat === selectedSet ? 'bg-(--panelbg-dark)' : 'bg-(--panelbg) hover:bg-(--panelbg-light)'}`}>
                 {cat}
               </button>
             </span>
 
        
-          ))}
-            
+          ))}            
         </div>
      
       </div>
@@ -68,8 +71,25 @@ const cards: Card[] = CARDS.filter(card => card.sets.includes(selectedSet));
             <p className="text-sm text-stone-300">No cards for this set.</p>
           )}
         </div>
-      </section>
+        </section>
       </div>
+
+      <div className="flex flex-col bg-(--panelbg) rounded-2xl p-4 w-full gap-2">
+        <span className='text-2xl py-3'>Actions</span>
+        <button onClick={() => clearSlots()}
+             className=' text-center rounded px-3 py-2 bg-(--panelbg-light) hover:bg-(--panelbg) '>Clear
+        </button>
+        <input
+          type="text"
+          value={selectionName}
+          onChange={e => setSelectionName(e.target.value)}
+          placeholder="Name your selection"
+          className="border rounded px-2 py-1"/>
+        <button onClick={() => saveSelection()}
+             className=' text-center rounded px-3 py-2 bg-(--panelbg-light) hover:bg-(--panelbg) '>Save
+        </button> 
+      </div>
+
     </div>
   );
 }

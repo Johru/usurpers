@@ -11,6 +11,7 @@ export default function BuilderPage() {
 
 
 const [slots, setSlots] = useState<(Card| null)[]>(Array(7).fill(null));
+const [selectionName, setSelectionName] = useState('');
 
 const addCard = (card: Card) => {
   setSlots(prev => {
@@ -28,6 +29,17 @@ const clearSlots = () => {
   setSlots(Array(7).fill(null));
 }
 
+const saveSelection = () => {
+  const existing = JSON.parse(localStorage.getItem('savedSelections') ?? '[]');
+  const newEntry = {
+    id: Date.now(),
+    name: selectionName || `Selection ${existing.length + 1}`,
+    slots: slots.filter((s): s is Card => s !== null),
+  };
+  localStorage.setItem('savedSelections', JSON.stringify([...existing, newEntry]));
+  setSelectionName('');
+  };
+
 
   return (
      <div className="flex min-h-screen items-center ">
@@ -39,11 +51,13 @@ const clearSlots = () => {
         <SelectedCards slots={slots} setSlots={setSlots}/>
 
         <div className="flex w-full gap-1">
-          <div className="flex-2" >
-           <SetSelection onSelectCard={addCard} clearSlots={clearSlots} />
+          <div className="flex-3"  >
+           <SetSelection onSelectCard={addCard} clearSlots={clearSlots} saveSelection={saveSelection} 
+           selectionName={selectionName} setSelectionName={setSelectionName} />
           </div>
       
-           <div className="flex-3">
+         
+           <div className="flex-2">
           <StatsSidebar slots={slots} />
           </div>
         </div>
