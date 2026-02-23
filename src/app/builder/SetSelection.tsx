@@ -4,14 +4,11 @@ import { CARDS, SET_NAMES, Card } from '@/lib/categories';
 
 type Props = {
   onSelectCard: (sub: Card) => void,
-  clearSlots: () => void,
-  saveSelection: () => void,
-  selectionName: string,
-  setSelectionName: (name: string) => void,
+ 
   
 };
 
-export default function CategorySelection({onSelectCard, clearSlots, saveSelection, selectionName, setSelectionName}: Props)
+export default function CategorySelection({onSelectCard}: Props)
 {
   const [selectedSet, setselectedSet] = useState<string>('shadow');
 
@@ -25,11 +22,11 @@ export default function CategorySelection({onSelectCard, clearSlots, saveSelecti
   
 
   return (
-    <div className="flex w-full  justify-self-end mt-1  gap-1">      
-      <div className="bg-(--panelbg) w-full rounded-2xl py-5 justify-self-end px-5  flex flex-col">  
+    <div className="flex flex-col w-full   justify-self-end mt-1  gap-1">      
+      <div className="bg-(--panelbg) w-full  rounded-2xl py-5 justify-self-end px-5 gap-7 flex">  
            
           <span className='text-2xl py-3'>Set</span>
-        <div className="mt-2 rounded-lg bg-(--panelbg-dark) p-3 text-sm w-50 grid grid-cols-2 gap-1"> 
+        <div className="mt-2 rounded-lg bg-(--panelbg-dark) p-3 text-sm w-50 flex flex-wrap w-full gap-1"> 
              {Object.keys(SET_NAMES).map(cat => (
             <span key={cat}>
               <button
@@ -46,13 +43,15 @@ export default function CategorySelection({onSelectCard, clearSlots, saveSelecti
         </div>
      
       </div>
-      <div className=" flex bg-(--panelbg) rounded-2xl p-4 w-full gap-2">
-        <section className="flex-1 rounded-2xl  p-4">
+
+
+      <div className="flex bg-(--panelbg) rounded-2xl p-4 w-full gap-2">
+        <section className="flex-1 flex gap-7 rounded-2xl  p-4">
         <h2 className="text-xl mb-3">
           {selectedSet.charAt(0).toUpperCase() + selectedSet.slice(1)}
         </h2>
         <div className="flex flex-wrap gap-2">
-          <ul className="flex flex-col gap-2">
+          <ul className="flex  gap-2">
           {cards.map(sub => (
             <li key={sub.id}>
             <button
@@ -74,21 +73,7 @@ export default function CategorySelection({onSelectCard, clearSlots, saveSelecti
         </section>
       </div>
 
-      <div className="flex flex-col bg-(--panelbg) rounded-2xl p-4 w-full gap-2">
-        <span className='text-2xl py-3'>Actions</span>
-        <button onClick={() => clearSlots()}
-             className=' text-center rounded px-3 py-2 bg-(--panelbg-light) hover:bg-(--panelbg) '>Clear
-        </button>
-        <input
-          type="text"
-          value={selectionName}
-          onChange={e => setSelectionName(e.target.value)}
-          placeholder="Name your selection"
-          className="border rounded px-2 py-1"/>
-        <button onClick={() => saveSelection()}
-             className=' text-center rounded px-3 py-2 bg-(--panelbg-light) hover:bg-(--panelbg) '>Save
-        </button> 
-      </div>
+     
 
     </div>
   );

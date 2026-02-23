@@ -24,7 +24,7 @@ export default function SavedPage() {
       {saved.map(entry => (
         <tr key={entry.id}>
           <td className="border border-gray-400 px-2 py-1 text-center text-2xl"><h3>{entry.name}</h3></td>
-          {entry.slots.map(card => <td key={card.id}  className="border border-gray-400 px-2 py-1">{card.label}</td>)}
+          {entry.slots.map(card => <td key={card.id}  className="border border-gray-400 px-2 py-1 text-center">{card.label}</td>)}
         </tr>
       ))}
    </table>

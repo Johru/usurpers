@@ -12,6 +12,7 @@ export default function BuilderPage() {
 
 const [slots, setSlots] = useState<(Card| null)[]>(Array(7).fill(null));
 const [selectionName, setSelectionName] = useState('');
+const [selectedCard, setSelectedCard] = useState<Card | null>(null);
 
 const addCard = (card: Card) => {
   setSlots(prev => {
@@ -44,23 +45,20 @@ const saveSelection = () => {
   return (
      <div className="flex min-h-screen items-center ">
       <main className="flex min-h-screen w-full h-full flex-col items-center sm:items-start">
-        <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight">
-          Selected Cards
-        </h1>
        
-        <SelectedCards slots={slots} setSlots={setSlots}/>
+        <SelectedCards slots={slots} setSlots={setSlots} clearSlots={clearSlots} saveSelection={saveSelection} 
+           selectionName={selectionName} setSelectionName={setSelectionName} setSelectedCard={setSelectedCard} />
 
-        <div className="flex w-full gap-1">
+        <div className="flex w-full gap-1 ">          
           <div className="flex-3"  >
-           <SetSelection onSelectCard={addCard} clearSlots={clearSlots} saveSelection={saveSelection} 
-           selectionName={selectionName} setSelectionName={setSelectionName} />
-          </div>
-      
-         
-           <div className="flex-2">
-          <StatsSidebar slots={slots} />
-          </div>
+           <SetSelection onSelectCard={addCard}  />
+          </div>         
+          <div className="flex-2">
+            <StatsSidebar slots={slots} selectedCard={selectedCard}/>
+          </div>      
         </div>
+        
+
       </main>
     </div>
   )

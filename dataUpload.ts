@@ -1,12 +1,31 @@
 import fs from 'fs';
+import { parse } from 'csv-parse/sync';
+
+interface RawRow {
+  id: string;
+  label: string;
+  set1: string;
+  set2: string;
+  cost: string;
+  rules: string;
+}
 
 const csv = fs.readFileSync('usurper.csv', 'utf-8');
-const lines = csv.trim().split('\n').slice(1); // skip header row
 
-const cards = lines.map((line) => {
-  const [id, label, set1, set2] = line.split(',').map((s) => s.trim());
-  return { id, label, sets: [set1, set2] };
-});
+const records = parse(csv, {
+  columns: true,
+  skip_empty_lines: true,
+  trim: true,
+  relax_quotes: true,
+}) as RawRow[];
+
+const cards = records.map((row: RawRow) => ({
+  id: row.id,
+  label: row.label,
+  sets: [row.set1, row.set2],
+  cost: row.cost,
+  rules: row.rules,
+}));
 
 const formatted = '[\n' + cards.map((c) => '  ' + JSON.stringify(c)).join(',\n') + '\n]';
 fs.writeFileSync('cards.json', formatted);
