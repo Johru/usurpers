@@ -4,6 +4,8 @@ export interface Card {
   id: string;
   label: string;
   sets: string[];
+  cost: string;
+  rules: string;
 }
 export interface Set {
   [category: string]: Card[];
@@ -28,7 +30,6 @@ export const SET_NAMES: Set_names = {
   retinue: 'retinue',
   shadow: 'shadow',
   mercenary: 'mercenary',
-  specialist: 'specialist',
   conspiracy: 'conspiracy',
   tactic: 'tactic',
 };

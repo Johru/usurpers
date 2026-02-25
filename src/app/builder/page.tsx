@@ -31,7 +31,9 @@ const clearSlots = () => {
 }
 
 const saveSelection = () => {
-  const existing = JSON.parse(localStorage.getItem('savedSelections') ?? '[]');
+    const trimmed = selectionName.trim();
+  if (!trimmed) return;
+  const existing= JSON.parse(localStorage.getItem('savedSelections') ?? '[]');
   const newEntry = {
     id: Date.now(),
     name: selectionName || `Selection ${existing.length + 1}`,
@@ -49,7 +51,7 @@ const saveSelection = () => {
         <SelectedCards slots={slots} setSlots={setSlots} clearSlots={clearSlots} saveSelection={saveSelection} 
            selectionName={selectionName} setSelectionName={setSelectionName} setSelectedCard={setSelectedCard} />
 
-        <div className="flex w-full gap-1 ">          
+        <div className="flex w-full gap-1 flex-col md:flex-row">          
           <div className="flex-3"  >
            <SetSelection onSelectCard={addCard}  />
           </div>         
