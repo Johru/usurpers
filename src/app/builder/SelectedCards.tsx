@@ -1,22 +1,39 @@
 
 import { Card } from '@/lib/categories';
 import Image from 'next/image';
-import { useRef } from 'react';
+import { useRef, useState} from 'react';
 type Props = {
   slots: (Card | null)[];
   setSlots: React.Dispatch<React.SetStateAction<(Card | null)[]>>;
    clearSlots: () => void,
-  saveSelection: () => void,
+ 
   selectionName: string,
   setSelectionName: (name: string) => void,
   setSelectedCard: (card: Card | null) => void,
+  editingId: number | null,
+  setEditingId: (id: number | null) => void,
 };
 
-export default function SelectedCards({ slots=[], setSlots,clearSlots, saveSelection, selectionName, setSelectionName, setSelectedCard }: Props) {
 
+
+export default function SelectedCards({ slots=[], setSlots,clearSlots,  selectionName, setSelectionName, setSelectedCard, setEditingId, editingId }: Props) {
+
+
+const handleNew = () => {
+ const newId = Date.now();
+  setSelectionName('');
+  setEditingId(newId);
+  const existing = JSON.parse(localStorage.getItem('savedSelections') ?? '[]');
+  localStorage.setItem('savedSelections', JSON.stringify([...existing, { id: newId, name: '', slots: [] }]));
+};
+const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+const toggleActive = (index: number) => {
+  setActiveIndex(prev => prev === index ? null : index);
+};
 const dragIndex = useRef<number | null>(null);
 
-const handleDragStart = (index: number | null): void => {
+const handleDragStart = (index: number ): void => {
   dragIndex.current = index;
 };
 
@@ -40,6 +57,18 @@ const removeCard = (index: number) => {
     return next;
   });
 };
+
+const moveCard = (from: number, to: number) => {
+  if (to < 0 || to >= slots.length) return;
+  setSlots(prev => {
+    const next = [...prev];
+    [next[from], next[to]] = [next[to], next[from]];
+    return next;
+  });
+  setActiveIndex(to);
+};
+
+
   return (
 
     <div className=" w-full rounded-2xl py-0 ">
@@ -47,19 +76,25 @@ const removeCard = (index: number) => {
          <h1 className="max-w-xs sr-only sm:not-sr-only md: md:text-3xl sm:text-2xl text-1xl font-semibold leading-10 tracking-tight">
           Selected Cards
         </h1>
-       <div className='justify-self-end flex gap-2 max-w-xs'>
+       <div className='justify-self-end flex gap-2'>
         <button onClick={() => clearSlots()}
              className=' text-center rounded md:px-3 px-2 md:py-2 bg-(--panelbg-light) hover:bg-(--panelbg) max-h-10 '>Clear
         </button>
-        <input
-          type="text"
-          value={selectionName}
-          onChange={e => setSelectionName(e.target.value)}
-          placeholder="Name your selection"
-          className="border rounded px-2 py-1 max-w-xs"/>
-        <button onClick={() => saveSelection()}
-             className=' text-center rounded md:px-3 px-2 py-2 bg-(--panelbg-light) hover:bg-(--panelbg) max-h-10'>Save
-        </button> 
+        {editingId ? (
+          <input
+            value={selectionName}
+            onChange={e => setSelectionName(e.target.value)}
+            className="bg-transparent border-b border-gray-400 text-lg font-semibold"
+          />
+        ) : (
+          <span className="text-gray-400 italic">Unsaved</span>
+        )}
+          <button
+            onClick={handleNew}
+            className="text-center rounded md:px-3 px-2 md:py-2 bg-(--panelbg-light) hover:bg-(--panelbg) max-h-10"
+          >
+            New
+          </button>
         </div>
       </div>
 
@@ -73,19 +108,40 @@ const removeCard = (index: number) => {
           onDragStart={() => handleDragStart(index)}
           onDragOver={(e) => e.preventDefault()}
           onDrop={() => handleDrop(index)}
-          onClick={() => setSelectedCard(card)} 
+          onClick={() => {
+            setSelectedCard(card);
+            toggleActive(index);
+          }}
   
         >
         {card ? (
           <div className="relative group ">
-            <button
-              onClick={() => removeCard(index)}
-        className="absolute top-0 right-3 z-10 hidden group-hover:flex 
-                   bg-red-500 text-white rounded-full w-5 h-5 
-                   items-center justify-center text-xs"
-            >
-              ✕
-            </button>
+            {activeIndex === index && (
+      <div className="absolute top-5 inset-0 z-10 flex flex-col items-center justify-between p-1">
+        <div className="flex justify-between items-center w-full">
+      <button
+      onClick={(e) => { e.stopPropagation(); moveCard(index, index - 1); }}
+      disabled={index === 0}
+      className="bg-black/95 text-yellow-300 rounded w-5 h-5 flex items-center justify-center disabled:opacity-20"
+    >
+      ◀
+    </button>
+    <button
+      onClick={(e) => { e.stopPropagation(); removeCard(index); }}
+      className="bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"
+    >
+      ✕
+    </button>
+    <button
+      onClick={(e) => { e.stopPropagation(); moveCard(index, index + 1); }}
+      disabled={index === slots.length - 1}
+      className="bg-black/95 text-yellow-300 text-8x1 rounded w-5 h-5 flex items-center justify-center disabled:opacity-20"
+    >
+      ▶
+    </button>
+      </div>
+      </div>
+    )}
             <span className="text-sm whitespace-nowrap">{card.label}</span>
             <Image src={`/cards/${card.id}.png`} alt={card.label} height={128} width={500} />
           </div>

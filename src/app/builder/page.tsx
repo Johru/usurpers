@@ -1,18 +1,41 @@
 'use client';
-import {useState } from "react";
+import {useCallback, useEffect, useState } from "react";
 import SetSelection from "./SetSelection";
 import SelectedCards from "./SelectedCards";
 import StatsSidebar from "./StatsSidebar";
 import { Card} from "@/lib/categories";
 
+type SavedSelection = { id: number; name: string; slots: Card[]; };
 
 
 export default function BuilderPage() {
 
-
-const [slots, setSlots] = useState<(Card| null)[]>(Array(7).fill(null));
-const [selectionName, setSelectionName] = useState('');
 const [selectedCard, setSelectedCard] = useState<Card | null>(null);
+
+  const [slots, setSlots] = useState<(Card | null)[]>(() => {
+    if (typeof window === 'undefined') return Array(7).fill(null);
+    const raw = localStorage.getItem('pendingEdit');
+    if (!raw) return Array(7).fill(null);
+    const entry = JSON.parse(raw) as SavedSelection;
+    return [...entry.slots, ...Array(7 - entry.slots.length).fill(null)];
+  });
+
+  const [selectionName, setSelectionName] = useState(() => {
+    if (typeof window === 'undefined') return '';
+    const raw = localStorage.getItem('pendingEdit');
+    return raw ? (JSON.parse(raw) as SavedSelection).name : '';
+  });
+
+  const [editingId, setEditingId] = useState<number | null>(() => {
+    if (typeof window === 'undefined') return null;
+    const raw = localStorage.getItem('pendingEdit');
+    if (raw) {
+      localStorage.removeItem('pendingEdit');
+      return (JSON.parse(raw) as SavedSelection).id;
+    }
+    return null;
+  });
+
 
 const addCard = (card: Card) => {
   setSlots(prev => {
@@ -30,26 +53,35 @@ const clearSlots = () => {
   setSlots(Array(7).fill(null));
 }
 
-const saveSelection = () => {
-    const trimmed = selectionName.trim();
-  if (!trimmed) return;
-  const existing= JSON.parse(localStorage.getItem('savedSelections') ?? '[]');
+
+
+const saveSelection = useCallback(() => {
+  if (!selectionName.trim()) return;
+  const existing: SavedSelection[] = JSON.parse(localStorage.getItem('savedSelections') ?? '[]');
   const newEntry = {
-    id: Date.now(),
-    name: selectionName || `Selection ${existing.length + 1}`,
+    id: editingId ?? Date.now(),
+    name: selectionName,
     slots: slots.filter((s): s is Card => s !== null),
   };
-  localStorage.setItem('savedSelections', JSON.stringify([...existing, newEntry]));
-  setSelectionName('');
-  };
+  const index = existing.findIndex(e => e.id === newEntry.id);
+  const updated = index !== -1 ? existing.with(index, newEntry) : [...existing, newEntry];
+  localStorage.setItem('savedSelections', JSON.stringify(updated));
+  setEditingId(newEntry.id);
+}, [slots, selectionName, editingId]);
 
+
+useEffect(() => {
+  if (!editingId || !selectionName.trim()) return;
+  const timeout = setTimeout(() => saveSelection(), 500);
+  return () => clearTimeout(timeout);
+}, [slots, selectionName, editingId, saveSelection]);
 
   return (
      <div className="flex min-h-screen items-center ">
       <main className="flex min-h-screen w-full h-full flex-col items-center sm:items-start">
        
-        <SelectedCards slots={slots} setSlots={setSlots} clearSlots={clearSlots} saveSelection={saveSelection} 
-           selectionName={selectionName} setSelectionName={setSelectionName} setSelectedCard={setSelectedCard} />
+        <SelectedCards slots={slots} setSlots={setSlots} clearSlots={clearSlots}  
+           selectionName={selectionName} setSelectionName={setSelectionName} setSelectedCard={setSelectedCard} editingId={editingId} setEditingId={setEditingId} />
 
         <div className="flex w-full gap-1 flex-col md:flex-row">          
           <div className="flex-3"  >
