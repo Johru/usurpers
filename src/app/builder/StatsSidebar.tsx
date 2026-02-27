@@ -79,6 +79,9 @@ function highlightKeywords(text: string): React.ReactNode[] {
           <>
           <h2 className='md:text-2xl text-lg pt-3'>{selectedCard.label}</h2> 
           <p>Cost: {selectedCard.cost}</p>
+          <br/>
+          <p>Sets: {selectedCard.sets.join(', ')}</p>
+          <br/>
           <p>{highlightKeywords(selectedCard.rules)}</p>
           </>
 
