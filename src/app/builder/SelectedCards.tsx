@@ -143,7 +143,7 @@ const moveCard = (from: number, to: number) => {
       </div>
     )}
             <span className="text-sm whitespace-nowrap">{card.label}</span>
-            <Image src={`/cards/${card.id}.png`} alt={card.label} height={128} width={500} />
+            <Image src={`/cards/${card.id}.webp`} alt={card.label} height={128} width={500} />
           </div>
         ) : (
           <div className="border-dashed border-2 border-gray-400 h-20 rounded-xl" /> 
