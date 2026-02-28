@@ -15,11 +15,11 @@ dryads,Dryads,magic,wilderness,1,"Any action: gain 1 wood, +2 if you have anothe
 acolytes,Acolytes,shadow,conspiracy,1,"When your unit dies, gain 1 coin
 Any action: you may sacrifice a unit to gain 2 food. "
 workshops,Workshops,,commoner,4,"When you activate a commoner, gain 2 charges, store any number. Spend charges any time to gain that many resources"
-raiders,Raiders,expansion,warrior,3,
+raiders,Raiders,expansion,warrior,3,"When you move, select one of the destination regions. If the region produces a resource, steal 1 of that resource (+1 if you have 4 warriors) from each opponent with a unit there. "
 banechanters,Bane chanters,retinue,cultist,1,"When you sacrifice a unit, gain 2 charges, store up to 6.
 Lock: gain 1 charge
 Melee/Ranged - you may spend charges to force opponents to reroll that many dice of your choice."
-shieldwall,Shield wall,defense,warrior,4,"When you move, select one of the destination regions. If the region produces a resource, steal 1 of that resource (+1 if you have 4 warriors) from each opponent with a unit there. "
+shieldwall,Shield wall,defense,warrior,4,"Battle: Ranged/Melee - ignore the first hit of the Battle (2 hits instead if you have 3 defense). Gain +1 combat die per warrior, up to 3"
 taxcollectors,Tax collectors,wealth,crime,3,"When you gain coins from another card's ability, gain +1 coin from the same source.
 Tax: after income, steal 2 coins (+1 if you have 3 crime) from each opponent"
 druids,Druids,shadow,wilderness,3,Any action: Select up to 1 forest you control per wilderderness. Pay 1 wood per selected forest to place 1 unit per shadow (up to 3) to each
@@ -28,7 +28,7 @@ volunteers,Volunteers,commoner,defense,1,"Aftermath - if you were the defender a
 Any action: If you have nobility, place 2 units in your homeland."
 assassins,Assassins ,conspiracy,crime,5,"Any action: Select a region with no more than 1 enemy unit (up to 2 units if you have 3 conspiracy). If you have 3 crime, you may pay 2 coins to convert them. Otherwise kill them."
 skirmishers,Skirmishers,conspiracy,tactic,3,"Melee - gain +1 melee die if you control 3 regions adjacent to the Battlefield
-Battle: move up to 2 units per tactic from the Battlefield to an adjacent region ignoring control"
+Battle: Start of Battle - move up to 2 units per tactic from the Battlefield to an adjacent region ignoring control"
 alchemists,Alchemists,magic,wealth,4,"Battle: Ranged - Before combat rolls, sacrifice a unit on the Battlefield. Kill 2 enemy units there.
 Any action: sell up to 1 resource per magic, each for 4 coins (+2 per other wealth)"
 siegeengines,Siege Engines,siege,retinue,5,"When you activate a retinue, gain 1 charge, store up to 6.
@@ -69,7 +69,7 @@ wraiths,Wraiths,magic,shadow,12,"Cleanup - Select three connected regions, all w
 flyingcastles,Flying Castles,nobility,defense,10,Battle: Start of Battle - you may move your outposts to any other regions ignoring distance and control. Roll +2 melee dice per outpost on or adjacent to the Battlefield.
 werewolves,Werewolves,warrior,wilderness,12,"Aftermath: Gain 1 food (+1 if you have 5 warriors) per unit you killed. If you killed at least one, start a new Melee phase where you roll +1 die per wilderness.
 Battle: Melee - roll +1 melee die per food"
-demons,Demons,Cultist,,0,"Sacrifice 7 units to buy this, minus the number of cultists. 
+demons,Demons,cultist,,0,"Sacrifice 7 units to buy this, minus the number of cultists. 
 Any action: move one step from your homeland to any region
 Battle: Start of Battle - move up to 1 enemy unit per cultist to an adjacent region. Roll 5 extra melee dice"
 valkyries,Valkyries,nobility,,10,"Place your units killed by opponents in Battles on this card. 

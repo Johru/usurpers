@@ -32,6 +32,7 @@ export const SET_NAMES: Set_names = {
   mercenary: 'mercenary',
   conspiracy: 'conspiracy',
   tactic: 'tactic',
+  shapeshifter: 'shapeshifter',
 };
 
 export const CARDS: Card[] = cards as Card[];
