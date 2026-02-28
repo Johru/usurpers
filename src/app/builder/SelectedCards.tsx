@@ -1,7 +1,7 @@
 
 import { Card } from '@/lib/categories';
 import Image from 'next/image';
-import { useRef, useState} from 'react';
+import { useRef} from 'react';
 type Props = {
   slots: (Card | null)[];
   setSlots: React.Dispatch<React.SetStateAction<(Card | null)[]>>;
@@ -12,11 +12,14 @@ type Props = {
   setSelectedCard: (card: Card | null) => void,
   editingId: number | null,
   setEditingId: (id: number | null) => void,
+  activeIndex: number | null;
+  setActiveIndex: React.Dispatch<React.SetStateAction<number | null>>;
+  toggleActive: (index: number) => void;
 };
 
 
 
-export default function SelectedCards({ slots=[], setSlots,clearSlots,  selectionName, setSelectionName, setSelectedCard, setEditingId, editingId }: Props) {
+export default function SelectedCards({ slots=[],toggleActive, setSlots,clearSlots, activeIndex, setActiveIndex,  selectionName, setSelectionName, setSelectedCard, setEditingId, editingId }: Props) {
 
 
 const handleNew = () => {
@@ -26,11 +29,9 @@ const handleNew = () => {
   const existing = JSON.parse(localStorage.getItem('savedSelections') ?? '[]');
   localStorage.setItem('savedSelections', JSON.stringify([...existing, { id: newId, name: '', slots: [] }]));
 };
-const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-const toggleActive = (index: number) => {
-  setActiveIndex(prev => prev === index ? null : index);
-};
+
+
 const dragIndex = useRef<number | null>(null);
 
 const handleDragStart = (index: number ): void => {
@@ -40,6 +41,8 @@ const handleDragStart = (index: number ): void => {
 const handleDrop = (dropIndex: number): void => {
   if (dragIndex.current === null) return;
   const fromIndex = dragIndex.current;
+  toggleActive(dropIndex);
+  setSelectedCard(slots[fromIndex]);
 
   setSlots(prev => {
     const next = [...prev];
@@ -60,12 +63,16 @@ const removeCard = (index: number) => {
 
 const moveCard = (from: number, to: number) => {
   if (to < 0 || to >= slots.length) return;
+  let card= slots[from];
   setSlots(prev => {
     const next = [...prev];
     [next[from], next[to]] = [next[to], next[from]];
+    card = next[to];
     return next;
-  });
-  setActiveIndex(to);
+  }); 
+  if (card )setSelectedCard(card);
+  toggleActive(to);
+ 
 };
 
 

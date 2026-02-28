@@ -11,6 +11,7 @@ type SavedSelection = { id: number; name: string; slots: Card[]; };
 export default function BuilderPage() {
 
 const [selectedCard, setSelectedCard] = useState<Card | null>(null);
+const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const [slots, setSlots] = useState<(Card | null)[]>(() => {
     if (typeof window === 'undefined') return Array(7).fill(null);
@@ -36,6 +37,10 @@ const [selectedCard, setSelectedCard] = useState<Card | null>(null);
     return null;
   });
 
+  const toggleActive = (index: number) => {
+  setActiveIndex(prev => prev === index ? null : index);
+};
+
 
 const addCard = (card: Card) => {
   setSlots(prev => {
@@ -44,7 +49,11 @@ const addCard = (card: Card) => {
 
     const next = [...prev];
     const emptyIndex = next.findIndex(s => s === null);
-    if (emptyIndex !== -1) next[emptyIndex] = card;
+    if (emptyIndex !== -1) {
+      next[emptyIndex] = card;
+      toggleActive(emptyIndex)
+      setSelectedCard(card);
+    }
     return next;
   });
 }
@@ -80,8 +89,8 @@ useEffect(() => {
      <div className="flex min-h-screen items-center ">
       <main className="flex min-h-screen w-full h-full flex-col items-center sm:items-start">
        
-        <SelectedCards slots={slots} setSlots={setSlots} clearSlots={clearSlots}  
-           selectionName={selectionName} setSelectionName={setSelectionName} setSelectedCard={setSelectedCard} editingId={editingId} setEditingId={setEditingId} />
+        <SelectedCards slots={slots} setSlots={setSlots} activeIndex={activeIndex} setActiveIndex={setActiveIndex} clearSlots={clearSlots}  
+           selectionName={selectionName} toggleActive={toggleActive} setSelectionName={setSelectionName} setSelectedCard={setSelectedCard} editingId={editingId} setEditingId={setEditingId} />
 
         <div className="flex w-full gap-1 flex-col md:flex-row">          
           <div className="flex-3"  >
