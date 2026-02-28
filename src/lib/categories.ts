@@ -16,23 +16,23 @@ export interface Set_names {
 }
 
 export const SET_NAMES: Set_names = {
-  wealth: 'wealth',
   commoner: 'commoner',
-  warrior: 'warrior',
-  nobility: 'nobility',
-  siege: 'siege',
-  expansion: 'expansion',
+  conspiracy: 'conspiracy',
   crime: 'crime',
-  magic: 'magic',
-  wilderness: 'wilderness',
   cultist: 'cultist',
   defense: 'defense',
+  expansion: 'expansion',
+  magic: 'magic',
+  mercenary: 'mercenary',
+  nobility: 'nobility',
   retinue: 'retinue',
   shadow: 'shadow',
-  mercenary: 'mercenary',
-  conspiracy: 'conspiracy',
-  tactic: 'tactic',
   shapeshifter: 'shapeshifter',
+  siege: 'siege',
+  tactic: 'tactic',
+  warrior: 'warrior',
+  wealth: 'wealth',
+  wilderness: 'wilderness',
 };
 
 export const CARDS: Card[] = cards as Card[];
