@@ -56,7 +56,8 @@ Any action: gain 3 coins (+3 per other wealth) per expansion"
 heraldsofapocalypse,Heralds of apocalypse,conspiracy,cultist,6,3,"When your last unit in a region dies, place 1 unit to your homeland (+1 if you have 3 cultists). If you have 3 conspiracy, place them in any village with your unit (other than the Battlefield) instead"
 entertainers,Entertainers,crime,expansion,7,3,"When you Move, gain 7 coins
 Cleanup: You may convert 1 enemy unit per crime for 5 coins each."
-knights,Knights,warrior,nobility,7,4,Your melee dice hit on 3+ 
+knights,Knights,warrior,nobility,7,4,"Your melee dice hit on 3+
+Cleanup: up to once per warrior, spend 7 food. Move that many steps. If you do, you must Battle in each destination."
 stonegiants,Stone giants,siege,wilderness,7,4,"When you Recruit, you pay exactly 1 stone to buy 1 extra unit per wilderness. Place them in a mountain region you control.
 Any action: destroy all enemy outposts in regions you control. Gain 2 wood for each."
 vigilantemob,Vigilante mob,conspiracy,commoner,8,4,Any action: gain 1 unit per conspiracy. Place them in any village (you don't have to control it).
@@ -69,7 +70,7 @@ wraiths,Wraiths,magic,shadow,12,5,"Cleanup - Select three connected regions, all
 flyingcastles,Flying Castles,nobility,defense,10,5,Battle: Start of Battle - you may move your outposts to any other regions ignoring distance and control. Roll +2 melee dice per outpost on or adjacent to the Battlefield.
 werewolves,Werewolves,warrior,wilderness,12,5,"Aftermath: Gain 1 food (+1 if you have 5 warriors) per unit you killed. If you killed at least one, start a new Melee phase where you roll +1 die per wilderness.
 Battle: Melee - roll +1 melee die per food"
-demons,Demons,cultist,,0,5,"Sacrifice 7 units to buy this, minus the number of cultists. 
+demons,Demons,cultist,siege,0,5,"Sacrifice 7 units to buy this, minus the number of cultists. 
 Any action: move one step from your homeland to any region
 Battle: Start of Battle - move up to 1 enemy unit per cultist to an adjacent region. Roll 5 extra melee dice"
 valkyries,Valkyries,nobility,,10,5,"Place your units killed by opponents in Battles on this card. 
