@@ -7,6 +7,7 @@ interface RawRow {
   set1: string;
   set2: string;
   cost: string;
+  tier: string;
   rules: string;
 }
 
@@ -24,6 +25,7 @@ const cards = records.map((row: RawRow) => ({
   label: row.label,
   sets: [row.set1, row.set2],
   cost: row.cost,
+  tier: row.tier,
   rules: row.rules,
 }));
 

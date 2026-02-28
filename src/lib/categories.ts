@@ -5,6 +5,7 @@ export interface Card {
   label: string;
   sets: string[];
   cost: string;
+  tier: string;
   rules: string;
 }
 export interface Set {

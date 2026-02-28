@@ -31,7 +31,6 @@ const KEYWORD_STYLES: { keywords: string[]; className: string }[] = [
 const SET_KEYWORDS = Object.values(SET_NAMES);
 
 function highlightKeywords(text: string): React.ReactNode[] {
-  // Build a combined regex from all keywords + set names
   const allKeywords = [
     ...KEYWORD_STYLES.flatMap(s => s.keywords),
     ...SET_KEYWORDS,
@@ -79,9 +78,12 @@ function highlightKeywords(text: string): React.ReactNode[] {
           <>
           <h2 className='md:text-2xl text-lg pt-3'>{selectedCard.label}</h2> 
           <br/>
-          <p>Cost: {selectedCard.cost}</p>
-          <br/>
-          <p>Sets: {selectedCard.sets.join(', ')}</p>
+          <div className='grid grid-cols-2 gap-2'>
+          <span>Cost: {selectedCard.cost}</span>
+          <span>Tier: {selectedCard.tier}</span>
+          <span>Sets:</span> 
+          <span>{selectedCard.sets.join(', ')}</span>
+          </div>
           <br/>
           <p>{highlightKeywords(selectedCard.rules)}</p>
           </>

@@ -13,13 +13,12 @@ type Props = {
   editingId: number | null,
   setEditingId: (id: number | null) => void,
   activeIndex: number | null;
-  setActiveIndex: React.Dispatch<React.SetStateAction<number | null>>;
   toggleActive: (index: number) => void;
 };
 
 
 
-export default function SelectedCards({ slots=[],toggleActive, setSlots,clearSlots, activeIndex, setActiveIndex,  selectionName, setSelectionName, setSelectedCard, setEditingId, editingId }: Props) {
+export default function SelectedCards({ slots=[],toggleActive, setSlots,clearSlots, activeIndex,  selectionName, setSelectionName, setSelectedCard, setEditingId, editingId }: Props) {
 
 
 const handleNew = () => {

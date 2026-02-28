@@ -89,7 +89,7 @@ useEffect(() => {
      <div className="flex min-h-screen items-center ">
       <main className="flex min-h-screen w-full h-full flex-col items-center sm:items-start">
        
-        <SelectedCards slots={slots} setSlots={setSlots} activeIndex={activeIndex} setActiveIndex={setActiveIndex} clearSlots={clearSlots}  
+        <SelectedCards slots={slots} setSlots={setSlots} activeIndex={activeIndex}  clearSlots={clearSlots}  
            selectionName={selectionName} toggleActive={toggleActive} setSelectionName={setSelectionName} setSelectedCard={setSelectedCard} editingId={editingId} setEditingId={setEditingId} />
 
         <div className="flex w-full gap-1 flex-col md:flex-row">          
