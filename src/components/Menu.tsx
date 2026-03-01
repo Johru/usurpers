@@ -41,8 +41,8 @@ export default function Menu() {
             </Link>
           </li>
           <li>
-            <Link href="/profile" className="flex items-center h-full py-0 px-1 hover:bg-stone-500">
-              <h2 className='md:text-2xl sm:text-2xl text-1xl'>Profile</h2>
+            <Link href="/changelog" className="flex items-center h-full py-0 px-1 hover:bg-stone-500">
+              <h2 className='md:text-2xl sm:text-2xl text-1xl'>Changelog</h2>
             </Link>
           </li>
         </ul>

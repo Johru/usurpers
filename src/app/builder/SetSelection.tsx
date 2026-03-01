@@ -10,13 +10,13 @@ type Props = {
 
 export default function CategorySelection({onSelectCard}: Props)
 {
-  const [selectedSet, setselectedSet] = useState<string>('shadow');
+  const [selectedSet, setselectedSet] = useState<string>('commoner');
 
   const cards: Card[] = CARDS.filter(card => card.sets.includes(selectedSet));
 
   const handleCardClick = (sub: Card) => {
     onSelectCard(sub); 
-    console.log('clicked subcategory', sub.id);
+    
   };
 
   

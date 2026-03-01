@@ -53,7 +53,25 @@ const addCard = (card: Card) => {
       next[emptyIndex] = card;
       toggleActive(emptyIndex)
       setSelectedCard(card);
+       const shapeshifterIndex = next.findIndex(s => s?.label === 'Shapeshifters');
+      if (shapeshifterIndex !== -1 && shapeshifterIndex !== emptyIndex) {
+        const shapeshifter = next[shapeshifterIndex]!;
+        const [first, second] = shapeshifter.sets;
+        const newCardSets = new Set(card.sets);
+
+      
+    const firstConflicts = newCardSets.has(first);
+    const secondConflicts = newCardSets.has(second);
+
+    if (firstConflicts && secondConflicts) {
+      const updated = {
+        ...shapeshifter,
+        sets: ['', ''] as [string, string],
+      };
+      next[shapeshifterIndex] = updated;
+      if (selectedCard?.label === 'Shapeshifters') setSelectedCard(updated);
     }
+    }}
     return next;
   });
 }
@@ -89,7 +107,7 @@ useEffect(() => {
      <div className="flex min-h-screen items-center ">
       <main className="flex min-h-screen w-full h-full flex-col items-center sm:items-start">
        
-        <SelectedCards slots={slots} setSlots={setSlots} activeIndex={activeIndex}  clearSlots={clearSlots}  
+        <SelectedCards slots={slots} setSlots={setSlots} activeIndex={activeIndex} clearSlots={clearSlots}  
            selectionName={selectionName} toggleActive={toggleActive} setSelectionName={setSelectionName} setSelectedCard={setSelectedCard} editingId={editingId} setEditingId={setEditingId} />
 
         <div className="flex w-full gap-1 flex-col md:flex-row">          
@@ -97,7 +115,7 @@ useEffect(() => {
            <SetSelection onSelectCard={addCard}  />
           </div>         
           <div className="flex-2">
-            <StatsSidebar slots={slots} selectedCard={selectedCard}/>
+            <StatsSidebar slots={slots} selectedCard={selectedCard} setSlots={setSlots} setSelectedCard={setSelectedCard} />
           </div>      
         </div>
         

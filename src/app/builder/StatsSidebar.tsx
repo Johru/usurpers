@@ -3,8 +3,10 @@ import { Card, SET_NAMES } from "@/lib/categories";
 type Props = {
   slots: (Card | null)[];
   selectedCard: Card | null;
+  setSlots: React.Dispatch<React.SetStateAction<(Card | null)[]>>;
+  setSelectedCard: React.Dispatch<React.SetStateAction<Card | null>>;
 };
-export default function StatsSidebar({ slots, selectedCard }: Props) {
+export default function StatsSidebar({ slots, selectedCard, setSlots, setSelectedCard }: Props) {
 
 const filledSlots = slots.filter(s => s !== null);
 const categoryCounts = filledSlots
@@ -59,6 +61,34 @@ function highlightKeywords(text: string): React.ReactNode[] {
   });
 }
 
+ const firstSet = selectedCard?.sets?.[0] ?? '';
+
+  const cardsWithFirstSet = slots
+    .filter((s): s is Card => s !== null && s.label !== 'Shapeshifters' && s.sets.includes(firstSet));
+
+  const excludedSets = new Set([
+    firstSet,
+    ...cardsWithFirstSet.flatMap(s => s.sets)
+  ]);
+
+const onShapeshifterChange = (position: 0 | 1, value: string) => {
+  setSlots(prev => {
+    const next = [...prev];
+    const shapeshifterIndex = next.findIndex(s => s?.label === 'Shapeshifters');
+    if (shapeshifterIndex === -1) return prev;
+
+    const current = next[shapeshifterIndex]!;
+    const newSets: [string, string] = [...(current.sets ?? ['', ''])] as [string, string];
+    newSets[position] = value;
+
+    const updated = { ...current, sets: newSets };
+    next[shapeshifterIndex] = updated;
+    setSelectedCard(updated); // sync selectedCard with the updated shapeshifter
+    return next;
+  });
+};
+
+
   return (
     <div className="flex gap-1 h-full">
 
@@ -82,7 +112,31 @@ function highlightKeywords(text: string): React.ReactNode[] {
           <span>Cost: {selectedCard.cost}</span>
           <span>Tier: {selectedCard.tier}</span>
           <span>Sets:</span> 
+          {selectedCard.label === 'Shapeshifters' ? (
+            <div className="flex flex-col gap-2">
+            <select
+            className={`bg-(--panelbg) ${selectedCard.sets?.[0] ? 'text-white' : 'text-red-500'}`}
+      value={selectedCard.sets?.[0] ?? ''}
+      onChange={e => onShapeshifterChange(0, e.target.value)}
+    >
+      <option value="">Select first set</option>
+      {Object.values(SET_NAMES).map(s => <option key={s} value={s}>{s}</option>)}
+    </select>
+    <select
+    className={`bg-(--panelbg) ${selectedCard.sets?.[1] ? 'text-white' : 'text-red-500'}`}
+  value={selectedCard.sets?.[1] ?? ''}
+  onChange={e => onShapeshifterChange(1, e.target.value)}
+  disabled={!firstSet}
+>
+  <option value="">Select second set</option>
+  {Object.values(SET_NAMES)
+    .filter(s => s !== 'shapeshifter' && !excludedSets.has(s))
+    .map(s => <option key={s} value={s}>{s}</option>)}
+</select>
+    </div>
+          ) : (
           <span>{selectedCard.sets.join(', ')}</span>
+          )}
           </div>
           <br/>
           <p>{highlightKeywords(selectedCard.rules)}</p>

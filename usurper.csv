@@ -55,9 +55,10 @@ traderoutes,Trade routes,wealth,expansion,6,3,"You may buy resources for 2 coins
 Any action: gain 3 coins (+3 per other wealth) per expansion"
 heraldsofapocalypse,Heralds of apocalypse,conspiracy,cultist,6,3,"When your last unit in a region dies, place 1 unit to your homeland (+1 if you have 3 cultists). If you have 3 conspiracy, place them in any village with your unit (other than the Battlefield) instead"
 entertainers,Entertainers,crime,expansion,7,3,"When you Move, gain 7 coins
-Cleanup: You may convert 1 enemy unit per crime for 5 coins each."
-knights,Knights,warrior,nobility,7,4,"Your melee dice hit on 3+
-Cleanup: up to once per warrior, spend 7 food. Move that many steps. If you do, you must Battle in each destination."
+Cleanup: You may convert 1 enemy unit per crime for 10 coins each."
+knights,Knights,warrior,nobility,7,4,"1. Your melee dice hit on 3+
+2. Buy charges for 5 food each, store up to 6
+Cleanup: spend up to 1 charge per warrior. Move that many steps. If you do, you must immediately Battle in each destination."
 stonegiants,Stone giants,siege,wilderness,7,4,"When you Recruit, you pay exactly 1 stone to buy 1 extra unit per wilderness. Place them in a mountain region you control.
 Any action: destroy all enemy outposts in regions you control. Gain 2 wood for each."
 vigilantemob,Vigilante mob,conspiracy,commoner,8,4,Any action: gain 1 unit per conspiracy. Place them in any village (you don't have to control it).
