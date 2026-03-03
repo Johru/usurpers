@@ -13,7 +13,7 @@ export default function BuilderPage() {
 const [selectedCard, setSelectedCard] = useState<Card | null>(null);
 const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  const [slots, setSlots] = useState<(Card | null)[]>(() => {
+const [slots, setSlots] = useState<(Card | null)[]>(() => {
     if (typeof window === 'undefined') return Array(7).fill(null);
     const raw = localStorage.getItem('pendingEdit');
     if (!raw) return Array(7).fill(null);
@@ -21,13 +21,13 @@ const [activeIndex, setActiveIndex] = useState<number | null>(null);
     return [...entry.slots, ...Array(7 - entry.slots.length).fill(null)];
   });
 
-  const [selectionName, setSelectionName] = useState(() => {
+const [selectionName, setSelectionName] = useState(() => {
     if (typeof window === 'undefined') return '';
     const raw = localStorage.getItem('pendingEdit');
     return raw ? (JSON.parse(raw) as SavedSelection).name : '';
   });
 
-  const [editingId, setEditingId] = useState<number | null>(() => {
+const [editingId, setEditingId] = useState<number | null>(() => {
     if (typeof window === 'undefined') return null;
     const raw = localStorage.getItem('pendingEdit');
     if (raw) {
@@ -36,11 +36,6 @@ const [activeIndex, setActiveIndex] = useState<number | null>(null);
     }
     return null;
   });
-
-  const toggleActive = (index: number) => {
-  setActiveIndex(prev => prev === index ? null : index);
-};
-
 
 const addCard = (card: Card) => {
   setSlots(prev => {
@@ -51,15 +46,15 @@ const addCard = (card: Card) => {
     const emptyIndex = next.findIndex(s => s === null);
     if (emptyIndex !== -1) {
       next[emptyIndex] = card;
-      toggleActive(emptyIndex)
+      setActiveIndex(emptyIndex)
       setSelectedCard(card);
+      console.log('New || Selected card:', card.label, 'at index:', emptyIndex);
        const shapeshifterIndex = next.findIndex(s => s?.label === 'Shapeshifters');
       if (shapeshifterIndex !== -1 && shapeshifterIndex !== emptyIndex) {
         const shapeshifter = next[shapeshifterIndex]!;
         const [first, second] = shapeshifter.sets;
         const newCardSets = new Set(card.sets);
-
-      
+     
     const firstConflicts = newCardSets.has(first);
     const secondConflicts = newCardSets.has(second);
 
@@ -80,8 +75,6 @@ const clearSlots = () => {
   setSlots(Array(7).fill(null));
 }
 
-
-
 const saveSelection = useCallback(() => {
   if (!selectionName.trim()) return;
   const existing: SavedSelection[] = JSON.parse(localStorage.getItem('savedSelections') ?? '[]');
@@ -96,7 +89,6 @@ const saveSelection = useCallback(() => {
   setEditingId(newEntry.id);
 }, [slots, selectionName, editingId]);
 
-
 useEffect(() => {
   if (!editingId || !selectionName.trim()) return;
   const timeout = setTimeout(() => saveSelection(), 500);
@@ -108,7 +100,7 @@ useEffect(() => {
       <main className="flex min-h-screen w-full h-full flex-col items-center sm:items-start">
        
         <SelectedCards slots={slots} setSlots={setSlots} activeIndex={activeIndex} clearSlots={clearSlots}  
-           selectionName={selectionName} toggleActive={toggleActive} setSelectionName={setSelectionName} setSelectedCard={setSelectedCard} editingId={editingId} setEditingId={setEditingId} />
+           selectionName={selectionName} setActiveIndex={setActiveIndex} setSelectionName={setSelectionName} setSelectedCard={setSelectedCard} editingId={editingId} setEditingId={setEditingId} />
 
         <div className="flex w-full gap-1 flex-col md:flex-row">          
           <div className="flex-3"  >

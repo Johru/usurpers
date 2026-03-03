@@ -12,10 +12,10 @@ type Props = {
   editingId: number | null,
   setEditingId: (id: number | null) => void,
   activeIndex: number | null;
-  toggleActive: (index: number) => void;
+  setActiveIndex: (index: number) => void;
 };
 
-export default function SelectedCards({ slots=[],toggleActive, setSlots,clearSlots, activeIndex,  selectionName, setSelectionName, setSelectedCard, setEditingId, editingId }: Props) {
+export default function SelectedCards({ slots=[],setActiveIndex, setSlots,clearSlots, activeIndex,  selectionName, setSelectionName, setSelectedCard, setEditingId, editingId }: Props) {
 
 const handleNew = () => {
   const newId = Date.now();
@@ -34,7 +34,8 @@ const handleDragStart = (index: number ): void => {
 const handleDrop = (dropIndex: number): void => {
   if (dragIndex.current === null) return;
   const fromIndex = dragIndex.current;
-  toggleActive(dropIndex);
+  setActiveIndex(dropIndex);
+  console.log('DropIndex:' , dropIndex);
   setSelectedCard(slots[fromIndex]);
   setSlots(prev => {
     const next = [...prev];
@@ -62,7 +63,7 @@ const moveCard = (from: number, to: number) => {
     return next;
   }); 
   if (card )setSelectedCard(card);
-  toggleActive(to);
+  setActiveIndex(to);
 };
 
   return (
@@ -107,7 +108,7 @@ const moveCard = (from: number, to: number) => {
             onDrop={() => handleDrop(index)}
             onClick={() => {
               setSelectedCard(card);
-              toggleActive(index);
+              setActiveIndex(index);
             }}
     
           >
