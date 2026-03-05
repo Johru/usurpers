@@ -143,7 +143,13 @@ const onShapeshifterChange = (position: 0 | 1, value: string) => {
             <p>{highlightKeywords(selectedCard.rules)}</p>
           </>
           ) : (
-          <p>Click a card to see details</p>
+          <ul className="text-sm md:text-2xl">
+            <li>1. Select a Set</li>
+            <li>2. Select a Card from that Set</li>
+            <li>3. Click New Selection to save your idea (name optional)</li>
+            <p className="text-sm mt-2">If you choose Shapeshifters, don&apos;t forget to select two Sets for them to join.</p>
+            <p className="text-sm mt-2">If you choose Shapeshifters, don&apos;t forget to select two Sets for them to join.</p>
+          </ul>
         )}
       </div>
       

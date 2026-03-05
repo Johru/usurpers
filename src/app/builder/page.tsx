@@ -4,6 +4,7 @@ import SetSelection from "./SetSelection";
 import SelectedCards from "./SelectedCards";
 import StatsSidebar from "./StatsSidebar";
 import { Card} from "@/lib/categories";
+import { addCardToSlots } from "@/lib/slotLogic";
 
 type SavedSelection = { id: number; name: string; slots: Card[]; };
 
@@ -39,37 +40,17 @@ const [editingId, setEditingId] = useState<number | null>(() => {
 
 const addCard = (card: Card) => {
   setSlots(prev => {
-    const isDuplicate = prev.some(s => s?.id === card.id);
-    if (isDuplicate) return prev;
-
-    const next = [...prev];
-    const emptyIndex = next.findIndex(s => s === null);
-    if (emptyIndex !== -1) {
-      next[emptyIndex] = card;
-      setActiveIndex(emptyIndex)
-      setSelectedCard(card);
-      console.log('New || Selected card:', card.label, 'at index:', emptyIndex);
-       const shapeshifterIndex = next.findIndex(s => s?.label === 'Shapeshifters');
-      if (shapeshifterIndex !== -1 && shapeshifterIndex !== emptyIndex) {
-        const shapeshifter = next[shapeshifterIndex]!;
-        const [first, second] = shapeshifter.sets;
-        const newCardSets = new Set(card.sets);
-     
-    const firstConflicts = newCardSets.has(first);
-    const secondConflicts = newCardSets.has(second);
-
-    if (firstConflicts && secondConflicts) {
-      const updated = {
-        ...shapeshifter,
-        sets: ['', ''] as [string, string],
-      };
-      next[shapeshifterIndex] = updated;
-      if (selectedCard?.label === 'Shapeshifters') setSelectedCard(updated);
-    }
-    }}
+    const result = addCardToSlots(prev, card);
+    if (!result) return prev;
+    const { next, emptyIndex, shapeshifterCleared } = result;
+    setActiveIndex(emptyIndex);
+    setSelectedCard(shapeshifterCleared && selectedCard?.label === 'Shapeshifters'
+      ? next[next.findIndex(s => s?.label === 'Shapeshifters')]
+      : card
+    );
     return next;
   });
-}
+};
 
 const clearSlots = () => {
   setSlots(Array(7).fill(null));

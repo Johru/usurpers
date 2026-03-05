@@ -6,6 +6,13 @@ export default function ChangelogPage() {
           Changelog
         </h1>
         <hr/>
+        <h2 className="font-bold mt-2 text-2xl">2.1</h2>
+        <ul className="list-disc list-inside text-sm md:text-base">
+          <h3 className="font-bold mt-2">Balance</h3>
+          <li>Dragon Riders no longer improve movement, instead they hit a second region.</li>
+          <li>Flying Castles now kill units on impact. </li>
+          <li>Werewolves give food per Aftermath, not per unit.</li>
+        </ul>
         <h2 className="font-bold mt-2 text-2xl">2.0</h2>
         <ul className="list-disc list-inside text-sm md:text-base">
           <h3 className="font-bold mt-2">Balance</h3>

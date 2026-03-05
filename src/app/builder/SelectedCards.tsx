@@ -12,7 +12,7 @@ type Props = {
   editingId: number | null,
   setEditingId: (id: number | null) => void,
   activeIndex: number | null;
-  setActiveIndex: (index: number) => void;
+  setActiveIndex: (index: number | null) => void;
 };
 
 export default function SelectedCards({ slots=[],setActiveIndex, setSlots,clearSlots, activeIndex,  selectionName, setSelectionName, setSelectedCard, setEditingId, editingId }: Props) {
@@ -26,6 +26,16 @@ const handleNew = () => {
 };
 
 const dragIndex = useRef<number | null>(null);
+
+const handleCardClick = (index: number) => {
+  if (activeIndex === index) {
+    setActiveIndex(null);
+    setSelectedCard(null);
+  } else {
+    setActiveIndex(index);
+    setSelectedCard(slots[index]);
+  }
+}
 
 const handleDragStart = (index: number ): void => {
   dragIndex.current = index;
@@ -74,24 +84,25 @@ const moveCard = (from: number, to: number) => {
         <h1 className="max-w-xs sr-only sm:not-sr-only md: md:text-3xl sm:text-2xl text-1xl font-semibold leading-10 tracking-tight">
           Selected Cards
         </h1>
-        <div className='justify-self-end flex gap-2'>
+        <div className='justify-self-end flex justify-items-center'>
           <button onClick={() => clearSlots()}
-              className=' text-center rounded md:px-3 px-2 md:py-2 bg-(--panelbg-light) hover:bg-(--panelbg) max-h-10 '>Clear
+              className='max-w-40 whitespace-nowrap text-center rounded md:px-3 px-2 md:py-2 bg-(--panelbg-dark) hover:bg-(--panelbg) max-h-10 '>
+                Clear Cards
           </button>
           {editingId ? (
             <input
               value={selectionName}
               onChange={e => setSelectionName(e.target.value)}
-              className="bg-transparent border-b border-gray-400 text-lg font-semibold"
+              className="w-full indent-2 bg-transparent border-b border-gray-400 text-lg font-semibold"
             />
           ) : (
             <span className="text-gray-400 italic">Unsaved</span>
           )}
           <button
             onClick={handleNew}
-            className="text-center rounded md:px-3 px-2 md:py-2 bg-(--panelbg-light) hover:bg-(--panelbg) max-h-10"
+            className="max-w-40 whitespace-nowrap text-center rounded md:px-3 px-2 md:py-2 bg-(--panelbg-dark) hover:bg-(--panelbg) max-h-10"
           >
-            New
+            New Selection
           </button>
         </div>
       </div>
@@ -108,7 +119,7 @@ const moveCard = (from: number, to: number) => {
             onDrop={() => handleDrop(index)}
             onClick={() => {
               setSelectedCard(card);
-              setActiveIndex(index);
+              handleCardClick(index);
             }}
     
           >

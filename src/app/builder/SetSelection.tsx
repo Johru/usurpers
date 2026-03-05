@@ -29,7 +29,7 @@ export default function CategorySelection({onSelectCard}: Props)
                   {cat}
                 </button>    
             ))}   
-          </div>         `
+          </div>         
        </section>  
       </div>
 
