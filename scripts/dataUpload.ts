@@ -1,5 +1,9 @@
 import fs from 'fs';
 import { parse } from 'csv-parse/sync';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 interface RawRow {
   id: string;
@@ -11,7 +15,7 @@ interface RawRow {
   rules: string;
 }
 
-const csv = fs.readFileSync('usurper.csv', 'utf-8');
+const csv = fs.readFileSync(join(__dirname, 'usurper.csv'), 'utf-8');
 
 const records = parse(csv, {
   columns: true,
@@ -30,4 +34,4 @@ const cards = records.map((row: RawRow) => ({
 }));
 
 const formatted = '[\n' + cards.map((c) => '  ' + JSON.stringify(c)).join(',\n') + '\n]';
-fs.writeFileSync('cards.json', formatted);
+fs.writeFileSync(join(__dirname, '../public/cards.json'), formatted);

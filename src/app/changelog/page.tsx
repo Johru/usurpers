@@ -6,9 +6,14 @@ export default function ChangelogPage() {
           Changelog
         </h1>
         <hr/>
-        <h2 className="font-bold mt-2 text-2xl">2.1</h2>
+        <h2 className="font-bold mt-2 text-2xl">2.2 - magic overhaul</h2>
         <ul className="list-disc list-inside text-sm md:text-base">
-          <h3 className="font-bold mt-2">Balance</h3>
+          <li>Alchemists damage now scales with magic</li>
+          <li>Portal Hoppers replace Illusionists and teleport units into Battle</li>
+          <li>New Card: Field Magicator</li>
+        </ul>
+           <h2 className="font-bold mt-2 text-2xl">2.1 - tier 5 tweaks</h2>
+        <ul className="list-disc list-inside text-sm md:text-base">
           <li>Dragon Riders no longer improve movement, instead they hit a second region.</li>
           <li>Flying Castles now kill units on impact. </li>
           <li>Werewolves give food per Aftermath, not per unit.</li>

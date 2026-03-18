@@ -29,15 +29,15 @@ Any action: If you have nobility, place 2 units in your homeland."
 assassins,Assassins ,conspiracy,crime,5,2,"Any action: Select a region with no more than 1 enemy unit (up to 2 units if you have 3 conspiracy). If you have 3 crime, you may pay 2 coins to convert them. Otherwise kill them."
 skirmishers,Skirmishers,conspiracy,tactic,3,2,"Melee - gain +1 melee die if you control 3 regions adjacent to the Battlefield
 Battle: Start of Battle - move up to 2 units per tactic from the Battlefield to an adjacent region ignoring control"
-alchemists,Alchemists,magic,wealth,4,2,"Battle: Ranged - Before combat rolls, sacrifice a unit on the Battlefield. Kill 2 enemy units there.
-Any action: sell up to 1 resource per magic, each for 4 coins (+2 per other wealth)"
+alchemists,Alchemists,magic,wealth,4,2,"Battle: Ranged - sacrifice a unit on the Battlefield. Roll 3 dice (+1 for every 2 other magic). Each 3+ is a hit. Deal a minimum of one hit.
+Any action: sell up to 3 resources per magic, each for 4 coins (+2 per other wealth)"
 siegeengines,Siege Engines,siege,retinue,5,2,"When you activate a retinue, gain 1 charge, store up to 6.
 Start of Combat phase: for every two charges you spend, select a region adjacent to your units. For each region, roll 3 dice, +2 per other siege. On each 4+, kill 1 enemy unit."
 soulshepherds,Soul Shepherds,cultist,defense,3,2,"1. When you sacrifice units, place  them on this card.
 2. When 2 or more your units die in Battle, sacrifice one of them, unless there are 3 units on this card 
 Battle: units on this card participate in the Battle. If you have 4 defense, place them on the Battlefield"
-illusionists,Illusionists,magic,crime,6,3,"When you activate a crime, steal 2 coins from an opponent.
-Battle: Ranged - opponent rolls 2 less dice (+1 per other magic)"
+portalhoppers,Portal Hoppers,magic,crime,6,3,"When you activate a crime, steal 2 coins from an opponent.
+Battle: Ranged - transfer up to 2 units (+1 per other crime) from one region to the Battlefield ignoring distance and control. Opponents roll 2 less melee dice (+1 per other magic)"
 quartermasters,Quartermasters,warrior,retinue,6,3,"1. When you activate a retinue, gain 1 food and add 1 charge to another card
 2. When you Move, you may spend up to 2 food per warrior to place that many units among the destination regions."
 trolls,Trolls,wilderness,mercenary,6,3,"When you Recruit, you may buy up to two additional units  per mercenary for 1 coin each. 
@@ -57,8 +57,8 @@ heraldsofapocalypse,Heralds of apocalypse,conspiracy,cultist,6,3,"When your last
 entertainers,Entertainers,crime,expansion,7,3,"When you Move, gain 7 coins
 Cleanup: You may convert 1 enemy unit per crime for 10 coins each."
 knights,Knights,warrior,nobility,7,4,"1. Your melee dice hit on 3+
-2. Buy charges for 5 food each, store up to 6
-Cleanup: spend up to 1 charge per warrior. Move that many steps. If you do, you must immediately Battle in each destination."
+2. Buy charges for 3 food each, store up to 6
+Cleanup: up to once charge per warrior, spend 2 charges. Move a step for every 2 spent. You must immediately Battle in each destination."
 stonegiants,Stone giants,siege,wilderness,7,4,"When you Recruit, you pay exactly 1 stone to buy 1 extra unit per wilderness. Place them in a mountain region you control.
 Any action: destroy all enemy outposts in regions you control. Gain 2 wood for each."
 vigilantemob,Vigilante mob,conspiracy,commoner,8,4,Any action: gain 1 unit per conspiracy. Place them in any village (you don't have to control it).
@@ -69,7 +69,7 @@ dragonriders,Dragon Riders,siege,nobility,10,4,"Battle: Ranged - roll 5 dice (+4
 Move: ignore control.  One of the steps can be up to 2 regions distance, skipping the first region."
 wraiths,Wraiths,magic,shadow,12,5,"Cleanup - Select three connected regions, all with your units or adjacent to them. Roll 3 dice, +1 per other shadow. Each 3+ is a hit in the first region. Apply any leftover hits to the second region, then to the third"
 flyingcastles,Flying Castles,nobility,defense,10,5,Battle: Start of Battle - you may move your outposts to any other regions ignoring distance and control. Roll +2 melee dice per outpost on or adjacent to the Battlefield.
-werewolves,Werewolves,warrior,wilderness,12,5,"Aftermath: Gain 1 food (+1 if you have 5 warriors) per unit you killed. If you killed at least one, start a new Melee phase where you roll +1 die per wilderness.
+werewolves,Werewolves,warrior,wilderness,12,5,"Aftermath: if you killed a unit, gain 1 food (+2 if you have 5 warriors) Start a new Melee phase where you roll +1 die per wilderness.
 Battle: Melee - roll +1 melee die per food"
 demons,Demons,cultist,siege,0,5,"Sacrifice 7 units to buy this, minus the number of cultists. 
 Any action: move one step from your homeland to any region
@@ -78,3 +78,7 @@ valkyries,Valkyries,nobility,,10,5,"Place your units killed by opponents in Batt
 Battle: Start of Battle - place 2 units per nobility on the Battlefield. Roll 1 extra melee die per nobility
 Final Scoring - gain 1VP for every host on this card. A host is 12 units minus nobility"
 shapeshifters,Shapeshifters,shapeshifter,,6,5,Lock - choose two different tags for this card. No other card on your frontline can have the same combination.
+fieldmagicator,Field Magicator,magic,retinue,7,5,"You can buy charges for 3 coins each.
+2 charges - this card has 3 magic instead of 1
+3 charges - Cleanup: move 1 step ignoring distance and control
+4 charges, min 5 magic - cancel the effect of one enemy Battle ability"
