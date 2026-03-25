@@ -55,8 +55,8 @@ locallevys,Local Levys,commoner,tactic,6,3,"1. When you activate a tactic, move 
 traderoutes,Trade routes,wealth,expansion,6,3,"You may buy resources for 2 coins each.
 When you Earn, gain 4 coins per wealth and 2 resources, +1 per other expansion"
 heraldsofapocalypse,Heralds of apocalypse,conspiracy,cultist,6,3,"When your last unit in a region dies, place 1 unit to your homeland (+1 if you have 3 cultists). If you have 3 conspiracy, place them in any village with your unit (other than the Battlefield) instead"
-entertainers,Entertainers,crime,expansion,7,3,"Any Action: gain 5 coins per Expansion.
-Start of Combat phase: You may convert 1 enemy unit per crime for 10 coins each."
+entertainers,Entertainers,crime,expansion,7,3,"Any action: gain 7 coins per expansion
+Start of Combat phase:  You may convert 1 enemy unit per crime for 10 coins each."
 knights,Knights,warrior,nobility,7,4,"1. Your melee dice hit on 3+
 2. Buy charges for 3 food each, store up to 6
 Cleanup: up to once charge per warrior, spend 2 charges. Move a step for every 2 spent. You must immediately Battle in each destination."
